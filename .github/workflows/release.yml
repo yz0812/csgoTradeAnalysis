@@ -7,11 +7,7 @@ on:
 
 jobs:
   release:
-    runs-on: ${{ matrix.os }}
-
-    strategy:
-      matrix:
-        os: [windows-latest, macos-latest]
+    runs-on: windows-latest
 
     steps:
       - name: Checkout code
@@ -29,31 +25,16 @@ jobs:
       - name: Build frontend
         run: npm run build
 
-      - name: Build Electron app (Windows)
-        if: matrix.os == 'windows-latest'
+      - name: Build Electron app
         run: npm run app:build
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build Electron app (macOS)
-        if: matrix.os == 'macos-latest'
-        run: npm run app:build
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Upload artifacts (Windows)
-        if: matrix.os == 'windows-latest'
+      - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
           name: windows-installer
           path: dist-electron/*.exe
-
-      - name: Upload artifacts (macOS)
-        if: matrix.os == 'macos-latest'
-        uses: actions/upload-artifact@v4
-        with:
-          name: macos-installer
-          path: dist-electron/*.dmg
 
   create-release:
     needs: release
@@ -71,9 +52,7 @@ jobs:
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
-          files: |
-            artifacts/windows-installer/*
-            artifacts/macos-installer/*
+          files: artifacts/windows-installer/*
           draft: false
           prerelease: false
           generate_release_notes: true

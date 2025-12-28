@@ -59,36 +59,6 @@
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
       "shortcutName": "CSGO交易分析"
-    },
-    "mac": {
-      "target": [
-        {
-          "target": "dmg",
-          "arch": ["x64", "arm64"]
-        }
-      ],
-      "category": "public.app-category.finance",
-      "artifactName": "${productName}-${version}-${arch}.${ext}"
-    },
-    "dmg": {
-      "background": null,
-      "backgroundColor": "#ffffff",
-      "window": {
-        "width": 540,
-        "height": 380
-      },
-      "contents": [
-        {
-          "x": 144,
-          "y": 150
-        },
-        {
-          "x": 396,
-          "y": 150,
-          "type": "link",
-          "path": "/Applications"
-        }
-      ]
     }
   }
 }
