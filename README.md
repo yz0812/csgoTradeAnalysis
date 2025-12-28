@@ -2,6 +2,7 @@
 
 基于 Electron + Vue 3 + Vite + Tailwind 构建的 CSGO 饰品交易记录分析桌面应用。
 
+![CSGO交易分析工具截图](./img/image.png)
 ## 功能特性
 
 - CSV 和 Excel 文件导入（支持 .csv/.xlsx/.xls）
