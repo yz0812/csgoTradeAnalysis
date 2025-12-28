@@ -35,6 +35,7 @@
   "build": {
     "appId": "com.csgo.tradeanalyzer",
     "productName": "CSGO交易分析",
+    "publish": ["github"],
     "directories": {
       "output": "dist-electron"
     },
