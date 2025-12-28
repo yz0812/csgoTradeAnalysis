@@ -11,7 +11,7 @@ jobs:
 
     strategy:
       matrix:
-        os: [windows-latest, macos-latest, ubuntu-latest]
+        os: [windows-latest, macos-latest]
 
     steps:
       - name: Checkout code
@@ -22,12 +22,6 @@ jobs:
         with:
           node-version: '18'
           cache: 'npm'
-
-      - name: Install Linux dependencies
-        if: matrix.os == 'ubuntu-latest'
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y libarchive-tools rpm
 
       - name: Install dependencies
         run: npm ci
@@ -47,12 +41,6 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build Electron app (Linux)
-        if: matrix.os == 'ubuntu-latest'
-        run: npm run app:build
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Upload artifacts (Windows)
         if: matrix.os == 'windows-latest'
         uses: actions/upload-artifact@v4
@@ -66,15 +54,6 @@ jobs:
         with:
           name: macos-installer
           path: dist-electron/*.dmg
-
-      - name: Upload artifacts (Linux)
-        if: matrix.os == 'ubuntu-latest'
-        uses: actions/upload-artifact@v4
-        with:
-          name: linux-installers
-          path: |
-            dist-electron/*.AppImage
-            dist-electron/*.deb
 
   create-release:
     needs: release
@@ -95,7 +74,6 @@ jobs:
           files: |
             artifacts/windows-installer/*
             artifacts/macos-installer/*
-            artifacts/linux-installers/*
           draft: false
           prerelease: false
           generate_release_notes: true

@@ -63,7 +63,7 @@ npm run app:build
 
 #### GitHub Actions 自动发布（多平台）
 
-本项目已配置 GitHub Actions，支持自动打包 Windows、macOS、Linux 三个平台的安装包。
+本项目已配置 GitHub Actions，支持自动打包 Windows 和 macOS 两个平台的安装包。
 
 **触发方式：**
 ```bash
@@ -81,16 +81,13 @@ git push --follow-tags
 - **macOS**:
   - `CSGO交易分析-1.0.0-x64.dmg` (Intel 芯片)
   - `CSGO交易分析-1.0.0-arm64.dmg` (Apple Silicon)
-- **Linux**:
-  - `CSGO交易分析-1.0.0-x64.AppImage` (通用格式)
-  - `CSGO交易分析-1.0.0-x64.deb` (Debian/Ubuntu)
 
 所有安装包会自动上传到 GitHub Releases 页面。
 
 **注意事项：**
 - 需要在 GitHub 仓库的 Settings → Actions → General 中启用 "Read and write permissions"
 - macOS 代码签名需要 Apple Developer 证书（可选，未配置时使用默认签名）
-- 首次打包约需 10-15 分钟（三个平台并行构建）
+- 首次打包约需 8-12 分钟（两个平台并行构建）
 
 **安装程序特性：**
 - 64位 Windows 安装包（NSIS）
