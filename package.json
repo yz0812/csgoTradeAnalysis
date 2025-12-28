@@ -68,8 +68,7 @@
         }
       ],
       "category": "public.app-category.finance",
-      "artifactName": "${productName}-${version}-${arch}.${ext}",
-      "icon": "build/icon.icns"
+      "artifactName": "${productName}-${version}-${arch}.${ext}"
     },
     "dmg": {
       "background": null,
@@ -103,8 +102,7 @@
         }
       ],
       "category": "Office",
-      "artifactName": "${productName}-${version}-${arch}.${ext}",
-      "icon": "build/icon.png"
+      "artifactName": "${productName}-${version}-${arch}.${ext}"
     }
   }
 }
