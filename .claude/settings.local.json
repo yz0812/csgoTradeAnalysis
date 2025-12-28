@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__ace-tool__search_context",
+      "mcp__filesystem__list_directory",
+      "Bash(mkdir:*)",
+      "Bash(magick:*)",
+      "Bash(convert:*)"
+    ]
+  }
+}
