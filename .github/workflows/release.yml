@@ -1,15 +1,13 @@
-name: Release
+name: Build and Release
 
 on:
   push:
     tags:
-      - 'v*' # 匹配 v1.0.0, v1.2.3 等格式的 tag
+      - 'v*'
 
 jobs:
-  release:
+  build-windows:
     runs-on: windows-latest
-    permissions:
-      contents: write
 
     steps:
       - name: Checkout code
@@ -18,7 +16,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20'
           cache: 'npm'
 
       - name: Install dependencies
@@ -27,7 +25,16 @@ jobs:
       - name: Build frontend
         run: npm run build
 
-      - name: Build and publish Electron app
+      - name: Build Electron app
         run: npm run app:build
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-build
+          path: |
+            dist-electron/*.exe
+            dist-electron/*.zip
+          retention-days: 7
